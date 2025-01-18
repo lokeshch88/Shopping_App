@@ -1,0 +1,251 @@
+.home {
+    text-align: center;
+    padding: 20px;
+    color: #ff6347; /* Matches the logo color */
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    justify-content: flex-start; 
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa; 
+        border-bottom: 1px solid #ff6347; /* Matches the logo color */
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-options {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-options li {
+    margin: 0 15px;
+    cursor: pointer;
+    color: #ff6347; /* Matches the logo color */
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navbar-options li:hover {
+    color: #ff8560; /* Slightly lighter shade on hover */
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    font-size: 1.5rem;
+    margin: 0 10px;
+    cursor: pointer;
+    color: #ff6347; /* Matches the logo color */
+    transition: transform 0.3s, color 0.3s;
+}
+
+.icon:hover {
+    color: #ff8560; /* Slightly lighter shade on hover */
+    transform: scale(1.2); /* Icon grows slightly on hover */
+}
+
+.logout-button, .login-button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #ff6347; /* Matches the logo color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover, .login-button:hover {
+    background-color: #ff8560; /* Slightly lighter shade on hover */
+}
+
+.logo-text {
+    font-family: Arial, sans-serif;
+    color: #ff6347; /* Matches the logo color */
+    cursor: pointer;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.logo-text:hover {
+    color: #ff8560; /* Slightly lighter shade on hover */
+}
+/* Home.css */
+
+
+
+
+
+/* Home.css */
+
+/* General Layout */
+.home {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure full-page height */
+  }
+  
+  /* Header Styles */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fef8f8;
+    color: white;
+    border-bottom: 1px solid #ff6347;
+  }
+  
+  .hamburger-icon {
+    font-size: 24px;
+    cursor: pointer;
+    color: #ff6347;
+  }
+  
+  .logo-container {
+    cursor: pointer;
+  }
+  
+  .logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff6347;
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .icon {
+    margin: 0 10px;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .logout-button, .login-button {
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .logout-button:hover, .login-button:hover {
+    background-color: #ff4500;
+  }
+  
+  /* Sidebar Styles */
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #fff9f9;
+    color: #ff6347;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000; /* Ensure sidebar is on top */
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .sidebar-menu {
+    list-style-type: none;
+    padding: 20px;
+  }
+  
+  .sidebar-menu li {
+    padding: 15px;
+    cursor: pointer;
+  }
+  
+  .sidebar-menu li:hover {
+    background-color: #f2e1de;
+  }
+  
+  .close-icon {
+    font-size: 20px;
+    color: #ff6347;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    transition: font-size 0.3s ease;
+  }
+  .close-icon:hover{
+    /* font-size: 25px; */
+    transform: scale(1.25)
+  }
+
+  /* Product List */
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 30px;
+    padding: 0 20px;
+    flex-grow: 1; /* Allow products to take available space */
+  }
+  
+  /* Footer Styles */
+  .footer {
+    background-color: #f9f8f8;
+    color: #ff6347;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto; /* Push footer to the bottom */
+  }
+  
+  .footer p {
+    margin: 5px 0;
+  }
+  .profile-dropdown{
+    position:absolute;
+    top: 100px;
+    right: 20px;
+    color: #ff6347;
+    background: #ffffff;
+
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: o 4px 8px rgba(0, 0, 0, 0.1);
+    width: 150px;
+    padding: 10px;
+    z-index: 1000;
+  }
+  .close-profile-dropdown{
+    position: absolute;
+    right: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+    transition: font-size 0.3s ease;
+  }
+  .close-profile-dropdown:hover{
+    /* font-size: 1.4rem; */
+    transform: scale(1.25)
+  }

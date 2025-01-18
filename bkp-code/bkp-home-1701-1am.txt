@@ -1,0 +1,139 @@
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import ProductCard from "./ProductCard";
+import "../CssFiles/Home.css"; // Optional for custom styles
+import { FaShoppingCart, FaUser } from "react-icons/fa"; // Importing icons
+
+const Home = () => {
+  const [cart, setCart] = useState([]);
+  const navigate = useNavigate();
+
+  const products = [
+    { id: 1, name: "luggage trolley Bag", price: 29.99, image: "/images/handbag.jfif" },
+    { id: 2, name: "Apple Watch Ultra 2", price: 49.99, image: "/images/apple-watch.jfif" },
+    { id: 3, name: "Body Spray", price: 19.99, image: "/images/bodyspray.jfif" },
+    { id: 4, name: "Product 4", price: 99.99, image: "https://via.placeholder.com/150" },
+    { id: 5, name: "Apple Watch Ultra 2", price: 49.99, image: "/images/apple-watch.jfif" },
+    { id: 6, name: "Body Spray", price: 19.99, image: "/images/bodyspray.jfif" },
+    { id: 7, name: "Product 4", price: 99.99, image: "https://via.placeholder.com/150" }
+  ];
+
+  useEffect(() => {
+    const user = localStorage.getItem("username");
+    if (user) {
+      const savedCart = JSON.parse(localStorage.getItem("cart")) || {};
+      setCart(savedCart[user] || []);
+    }
+  }, []);
+
+  const addToCart = (product) => {
+    const user = localStorage.getItem("username");
+    if (!user) {
+      alert("Please log in first to add items to the cart.");
+      return;
+    }
+
+    const updatedCart = JSON.parse(localStorage.getItem("cart")) || {};
+    if (!updatedCart[user]) {
+      updatedCart[user] = [];
+    }
+
+    const existingProduct = updatedCart[user].find(item => item.id === product.id);
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+    } else {
+      updatedCart[user].push({ ...product, quantity: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    setCart(updatedCart[user]);
+    alert(${product.name} added to cart!);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("username");
+    alert("All cart items will be removed");
+    localStorage.removeItem("cart");
+    setCart([]);
+    navigate("/");
+  };
+
+  const handleLogin = () => {
+    navigate("/");
+  };
+
+  const handleGoToCart = () => {
+    navigate("/cart");
+  };
+
+  const updateQuantity = (id, amount) => {
+    const user = localStorage.getItem("username");
+    const updatedCart = JSON.parse(localStorage.getItem("cart")) || {};
+    if (!updatedCart[user]) return;
+
+    const existingProduct = updatedCart[user].find(item => item.id === id);
+    if (existingProduct) {
+      const newQuantity = existingProduct.quantity + amount;
+      if (newQuantity <= 0) {
+        updatedCart[user] = updatedCart[user].filter(item => item.id !== id);
+      } else {
+        existingProduct.quantity = newQuantity;
+      }
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      setCart(updatedCart[user]);
+    }
+  };
+
+  return (
+    <div className="home">
+      {/* Navbar */}
+      <nav className="navbar">
+        <div className="navbar-left">
+          <h1 
+            className="logo-text" 
+            onClick={() => navigate("/home")}
+            style={{ fontFamily: "Arial, sans-serif", color: "#ff6347", cursor: "pointer" }}
+          >
+            ShopOneGo
+          </h1>
+          <ul className="navbar-options">
+            <li onClick={() => navigate("/")}>Home</li>
+            <li onClick={() => navigate("/categories")}>Categories</li>
+          </ul>
+        </div>
+        <div className="navbar-right">
+          <FaShoppingCart 
+            className="icon cart-icon" 
+            onClick={handleGoToCart} 
+          />
+          <FaUser 
+            className="icon profile-icon" 
+            onClick={() => navigate(localStorage.getItem("username") ? "/profile" : "/login")}
+          />
+          {localStorage.getItem("username") ? (
+            <button onClick={handleLogout} className="logout-button">Logout</button>
+          ) : (
+            <button onClick={handleLogin} className="login-button">Login</button>
+          )}
+        </div>
+      </nav>
+
+      {/* <h1>Welcome</h1> */}
+      <div className="product-list">
+        {products.map(product => (
+          <ProductCard
+            key={product.id}
+            product={{
+              ...product,
+              quantity: cart.find(item => item.id === product.id)?.quantity || 0,
+            }}
+            addToCart={addToCart}
+            updateQuantity={updateQuantity}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Home;  
